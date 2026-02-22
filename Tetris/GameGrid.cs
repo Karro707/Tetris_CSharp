@@ -35,7 +35,7 @@ namespace Tetris
             return (grid[r,c] == 0 && IsInside(r,c));
         }
 
-        public bool IsRowFull(int r, int c) //checks if the row is full
+        public bool IsRowFull(int r) //checks if the row is full
         {
             for (int i = 0; i < Cols; i++)
             {
@@ -44,7 +44,7 @@ namespace Tetris
             return true;
         }
 
-        public bool IsRowEmpty(int r, int c) //checks if the row is empty
+        public bool IsRowEmpty(int r) //checks if the row is empty
         {
             for (int i = 0; i < Cols; i++)
             {
@@ -70,13 +70,13 @@ namespace Tetris
             }
         }
 
-        public int ClearFullRows(int r, int c) //clears rows and moves everything down
+        public int ClearFullRows() //clears rows and moves everything down
         {
             int Cleared = 0;
             int i = 0;
-            while (IsRowEmpty(i,c))
+            while (IsRowEmpty(i))
             {
-                if (IsRowFull(i, c))
+                if (IsRowFull(i))
                 {
                     ClearRow(i);
                     Cleared++;
