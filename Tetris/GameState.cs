@@ -98,6 +98,26 @@ namespace Tetris
             }
 
             GameGrid.ClearFullRows(); //checks if a row is full after putting a block
+
+            if(IsGameOver()) //check if the block finished the game
+            {
+                GameOver = true;
+            }
+            else
+            {
+                CurrentBlock = BlockQueue.GetAndUpdate(); 
+            }
+        }
+
+        public void MoveBlockDown() //blocks in tetris going down
+        {
+            CurrentBlock.Move(1, 0);
+
+            if (!BlockFits())
+            {
+                CurrentBlock.Move(-1, 0);
+                PlaceBlock(); //in case the block can't be moved down, place it 
+            }
         }
     }
 }

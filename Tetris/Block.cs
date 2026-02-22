@@ -61,5 +61,13 @@ namespace Tetris
             offset.Row = StartOffset.Row;
             offset.Col = StartOffset.Col;
         }
+
+        public IEnumerable<Position> TilePositions()
+        {
+            foreach (Position p in Tiles[rotationState])
+            {
+                yield return new Position (p.Row + offset.Row, p.Col + offset.Col);
+            }
+        }
     }
 }
