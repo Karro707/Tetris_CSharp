@@ -104,19 +104,68 @@ namespace Tetris
             DrawBlock(gameState.CurrentBlock);
         }
 
-        public void Window_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void GameCanvas_Loaded(object sender, RoutedEventArgs e)
+        //async makes the game "wait" without actually stoping the program
+        private async Task GameLoop()
         {
             Draw(gameState);
+
+            while(!gameState.GameOver)
+            {
+                await Task.Delay(500);
+                gameState.MoveBlockDown();
+                Draw(gameState);
+            }
+
+            GameOverMenu.Visibility = Visibility.Visible;
         }
 
-        private void PlayAgain_Click(object sender, RoutedEventArgs e)
+        public void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            if(!gameState.GameOver)
+            {
+                switch(e.Key)
+                {
+                    //moving
+                    case Key.Left:
+                    case Key.A:
+                        gameState.MoveBlockLeft();
+                        break;
+                    case Key.Right:
+                    case Key.D:
+                        gameState.MoveBlockRight();
+                        break;
+                    case Key.Down:
+                    case Key.S:
+                        gameState.MoveBlockDown(); 
+                        break;
 
+                    //rotating 
+                    case Key.X:
+                        gameState.RotateBlockCW();
+                        break;
+                    case Key.Z:
+                        gameState.RotateBlockCounterCW();
+                        break;
+
+                    default:
+                        return;
+                }
+
+                Draw(gameState);
+                System.Diagnostics.Debug.WriteLine("Game drawn");
+            }
+        }
+
+        private async void GameCanvas_Loaded(object sender, RoutedEventArgs e)
+        {
+            await GameLoop();
+        }
+
+        private async void PlayAgain_Click(object sender, RoutedEventArgs e)
+        {
+            gameState = new GameState();
+            GameOverMenu.Visibility= Visibility.Hidden;
+            await GameLoop();
         }
     }
 }

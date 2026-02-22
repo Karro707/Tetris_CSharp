@@ -14,7 +14,6 @@ namespace Tetris
             //(y,x)
             new Position[] { new(0,2), new(0,1), new(1,1), new(1,0) }, //State 1
             new Position[] { new(0,0), new(1,0), new(1,1), new(2,1) }, //State 1
-            new Position[] { new(1,2), new(1,1), new(2,1), new(2,2) }, //State 2
         };
 
         public override int ID => 6;
@@ -32,8 +31,3 @@ namespace Tetris
 //100
 //110
 //010
-
-//State 2
-//000
-//011
-//110

@@ -32,7 +32,7 @@ namespace Tetris
 
         public bool IsEmpty(int r, int c) //checks if the cell is empty or not
         {
-            return (grid[r,c] == 0 && IsInside(r,c));
+            return (IsInside(r, c) && grid[r, c] == 0);
         }
 
         public bool IsRowFull(int r) //checks if the row is full

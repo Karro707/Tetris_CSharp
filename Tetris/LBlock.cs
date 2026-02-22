@@ -12,8 +12,8 @@ namespace Tetris
         private readonly Position[][] tiles = new Position[][] //positions of L block
         {   
             //(y,x)
-            new Position[] { new(0,2), new(1,0), new(1,1), new(1,2) }, //State 0
-            new Position[] { new(2,2), new(0,1), new(1,1), new(2,1) }, //State 1
+            new Position[] { new(0,2), new(1,2), new(1,1), new(1,0) }, //State 0
+            new Position[] { new(2,2), new(2,1), new(1,1), new(0,1) }, //State 1
             new Position[] { new(2,0), new(1,2), new(1,1), new(1,0) }, //State 2
             new Position[] { new(0,0), new(0,1), new(1,1), new(2,1) }, //State 3
         };

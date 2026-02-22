@@ -18,6 +18,16 @@ namespace Tetris
                 currentBlock = value;
                 currentBlock.Reset();
 
+                for(int i=0; i < 2;i++) //moves the spawned block 2 tiles if nothing is in the way
+                {
+                    currentBlock.Move(1, 0);
+
+                    if(!BlockFits())
+                    {
+                        currentBlock.Move(-1, 0);
+                    }
+                }
+
             }
         }
 
