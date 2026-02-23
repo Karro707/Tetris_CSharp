@@ -35,6 +35,8 @@ namespace Tetris
         public BlockQueue BlockQueue { get; }
         public bool GameOver { get; private set; } //checks if the player lost
 
+        public int Score { get; private set; } //total number of rows cleared
+
         public GameState()
         {
             GameGrid = new GameGrid(22, 10); //game screen 22x10
@@ -107,7 +109,7 @@ namespace Tetris
                 GameGrid[p.Row, p.Col] = CurrentBlock.ID;
             }
 
-            GameGrid.ClearFullRows(); //checks if a row is full after putting a block
+            Score += GameGrid.ClearFullRows(); //checks if a row is full after putting a block
 
             if(IsGameOver()) //check if the block finished the game
             {

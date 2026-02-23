@@ -67,7 +67,7 @@ namespace Tetris
                         Height = cellSize,
                     };
 
-                    Canvas.SetTop(imageControl, (r - 2) * cellSize); //-2 is to push the top hidden rows up so that they're not inside canvas
+                    Canvas.SetTop(imageControl, (r - 2) * cellSize + 10); //-2 is to push the top hidden rows up so that they're not inside canvas
                     Canvas.SetLeft(imageControl, c * cellSize); //distance from the left side of canvas to the left side of image
 
                     GameCanvas.Children.Add(imageControl); //image the child of canvas  
@@ -98,10 +98,18 @@ namespace Tetris
             }
         }
 
+        private void DrawNextBlock(BlockQueue blockQueue)
+        {
+            Block next = blockQueue.NextBlock;
+            NextImage.Source = blockImages[next.ID];
+        }
+
         private void Draw(GameState gameState)
         {
             DrawGrid(gameState.GameGrid);
             DrawBlock(gameState.CurrentBlock);
+            DrawNextBlock(gameState.BlockQueue);
+            ScoreText.Text = $"Score: {gameState.Score}";
         }
 
         //async makes the game "wait" without actually stoping the program
@@ -117,6 +125,7 @@ namespace Tetris
             }
 
             GameOverMenu.Visibility = Visibility.Visible;
+            FinalScoreText.Text = $"Score: {gameState.Score}";
         }
 
         public void Window_KeyDown(object sender, KeyEventArgs e)
