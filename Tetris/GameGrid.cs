@@ -73,20 +73,18 @@ namespace Tetris
         public int ClearFullRows() //clears rows and moves everything down
         {
             int Cleared = 0;
-            int i = 0;
-            while (IsRowEmpty(i))
+            for (int r = Rows - 1; r >= 0; r--) //starts from the bottom to check
             {
-                if (IsRowFull(i))
+                if (IsRowFull(r))
                 {
-                    ClearRow(i);
+                    ClearRow(r);
                     Cleared++;
                 }
-                else if (Cleared != 0)
+                else if (Cleared > 0)
                 {
-                    MoveDown(i,Cleared);
+                    MoveDown(r,Cleared);
                 }
                 
-                i++;
             }
 
             return Cleared;
